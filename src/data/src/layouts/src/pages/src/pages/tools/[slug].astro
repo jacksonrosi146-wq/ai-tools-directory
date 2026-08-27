@@ -1,0 +1,70 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { tools } from '../../data/tools.js';
+
+// এই ফাংশনটি প্রতিটি টুলের জন্য আলাদা পেজ তৈরি করে
+export async function getStaticPaths() {
+  return tools.map((tool) => ({
+    params: { slug: tool.slug },
+    props: { tool },
+  }));
+}
+
+const { tool } = Astro.props;
+---
+<Layout title={tool.title} description={tool.desc} image={tool.image}>
+    <article class="max-w-4xl mx-auto px-4 py-16">
+        <!-- Tool Header -->
+        <div class="bg-white rounded-[3rem] shadow-2xl shadow-blue-100 border border-slate-100 p-8 md:p-12 mb-12 flex flex-col md:flex-row items-center gap-10">
+            <img src={tool.image} alt={tool.name} class="w-32 h-32 md:w-40 md:h-40 rounded-[2.5rem] shadow-xl border-4 border-white p-2 bg-slate-50" />
+            <div class="text-center md:text-left">
+                <span class="bg-blue-100 text-blue-700 px-5 py-1.5 rounded-full text-xs font-black uppercase tracking-[0.2em]">{tool.category}</span>
+                <h1 class="text-4xl md:text-6xl font-black mt-4 tracking-tight text-slate-900 leading-tight">{tool.name} Full Review</h1>
+                <p class="text-lg text-slate-500 mt-2 font-medium">Professional SEO Guide & Use Cases</p>
+            </div>
+        </div>
+
+        <!-- Content Sections -->
+        <div class="space-y-16">
+            <!-- Description -->
+            <section>
+                <h2 class="text-3xl font-extrabold mb-6 flex items-center gap-3">
+                    <span class="w-2 h-8 bg-blue-600 rounded-full"></span>
+                    What is {tool.name}?
+                </h2>
+                <p class="text-xl text-slate-700 leading-loose text-justify font-light italic">
+                   {tool.desc}
+                </p>
+            </section>
+
+            <!-- How To Use -->
+            <section class="bg-indigo-900 text-white p-10 md:p-16 rounded-[4rem] shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-10 -mt-10"></div>
+                <h2 class="text-3xl font-bold mb-8 underline underline-offset-8 decoration-yellow-400">🚀 How To Use (USA Standard Guide)</h2>
+                <div class="text-lg md:text-xl leading-loose opacity-90 whitespace-pre-line font-medium">
+                    {tool.howToUse}
+                </div>
+            </section>
+
+            <!-- Pros & Cons -->
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-emerald-50 p-8 rounded-[2.5rem] border border-emerald-100 shadow-sm">
+                    <h3 class="text-xl font-black text-emerald-800 mb-6 uppercase tracking-widest italic underline underline-offset-4">Top Advantages</h3>
+                    <ul class="space-y-4 font-bold text-emerald-700">
+                        {tool.pros.map(p => <li class="flex items-start gap-3"><span>✅</span> {p}</li>)}
+                    </ul>
+                </div>
+                <div class="bg-rose-50 p-8 rounded-[2.5rem] border border-rose-100 shadow-sm">
+                    <h3 class="text-xl font-black text-rose-800 mb-6 uppercase tracking-widest italic underline underline-offset-4">Limitations</h3>
+                    <ul class="space-y-4 font-bold text-rose-700">
+                        {tool.cons.map(c => <li class="flex items-start gap-3"><span>❌</span> {c}</li>)}
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Features -->
+            <section class="bg-slate-100 p-10 rounded-[3rem] border border-slate-200">
+                <h2 class="text-2xl font-black mb-6 text-slate-800 uppercase tracking-tighter">Key Features:</h2>
+                <div class="flex flex-wrap gap-3">
+                    {tool.features.map(f => (
+                        <span class="px-6 py-3 bg-white rounded-2xl font-extrabold text-blue-600 shadow-
