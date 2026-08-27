@@ -1,0 +1,32 @@
+---
+const { title, description, image } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:image" content={image} />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="bg-slate-50 font-['Plus_Jakarta_Sans'] text-slate-900">
+    <nav class="bg-white/80 backdrop-blur-md border-b sticky top-0 z-50 p-4 shadow-sm">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <a href="/" class="text-2xl font-black text-blue-600 tracking-tighter">AI HUB PRO</a>
+            <div class="flex gap-6 text-xs font-bold uppercase tracking-widest">
+                <a href="/" class="hover:text-blue-600">Home</a>
+                <a href="/privacy" class="hover:text-blue-600 italic">Privacy</a>
+            </div>
+        </div>
+    </nav>
+    <slot />
+    <footer class="bg-slate-900 text-white py-16 mt-20 text-center">
+        <div class="max-w-6xl mx-auto px-4">
+            <p class="text-slate-400">© 2024 AI Hub Pro - Professional USA AI Directory Guide</p>
+        </div>
+    </footer>
+</body>
+</html>
