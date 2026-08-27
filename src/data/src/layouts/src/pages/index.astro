@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { tools } from '../data/tools.js';
+---
+<Layout title="Best AI Tools Directory 2024 | AI Hub Pro" description="Compare and explore the top AI software for business, marketing, and students with professional guides.">
+    <!-- Hero Section -->
+    <header class="py-24 bg-gradient-to-b from-blue-700 to-indigo-800 text-white text-center px-4">
+        <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-tight">The Future of AI is <span class="text-yellow-400 italic underline">Here</span></h1>
+        <p class="text-xl max-w-2xl mx-auto opacity-90 font-medium leading-relaxed">Discover 120+ professional AI tools with complete 'How-to' guides, reviews, and SEO insights for the USA market.</p>
+    </header>
+
+    <!-- Tools Grid -->
+    <main class="max-w-6xl mx-auto px-4 -mt-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {tools.map((tool) => (
+                <div class="bg-white rounded-[2.5rem] shadow-2xl border border-slate-100 p-8 flex flex-col hover:-translate-y-3 transition duration-500 group">
+                    <div class="flex justify-between items-start mb-6">
+                        <img src={tool.image} alt={tool.name} class="w-16 h-16 rounded-2xl shadow-sm border p-2 bg-slate-50"/>
+                        <span class="bg-blue-50 text-blue-700 text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest border border-blue-100">{tool.category}</span>
+                    </div>
+                    <h2 class="text-3xl font-extrabold mb-3 group-hover:text-blue-600 transition">{tool.name}</h2>
+                    <p class="text-slate-600 mb-8 text-sm leading-relaxed line-clamp-3 italic">"{tool.desc}"</p>
+                    <a href={`/tools/${tool.slug}`} class="mt-auto block text-center bg-blue-600 text-white font-bold py-4 rounded-2xl hover:shadow-xl hover:shadow-blue-200 hover:bg-blue-700 transition-all duration-300">Read Professional Guide →</a>
+                </div>
+            ))}
+        </div>
+    </main>
+
+    <!-- Category Section Placeholder -->
+    <section class="max-w-6xl mx-auto px-4 mt-24 text-center">
+        <h3 class="text-sm font-black uppercase tracking-[0.4em] text-slate-400 mb-4">Popular Categories</h3>
+        <div class="flex flex-wrap justify-center gap-4">
+            {["AI Writing", "Image Generators", "Video AI", "Marketing Tools"].map(cat => (
+                <span class="px-6 py-2 bg-slate-200 rounded-full font-bold text-slate-600 text-xs">{cat}</span>
+            ))}
+        </div>
+    </section>
+</Layout>
